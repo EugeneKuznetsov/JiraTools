@@ -29,10 +29,10 @@ CheckBox {
     }
     contentItem: Bricks.Label {
         anchors {
-            verticalCenter: parent.indicator.verticalCenter
             left: parent.indicator.right
             leftMargin: 5
         }
+        verticalAlignment: Text.AlignVCenter
         text: parent.text
     }
 }
