@@ -6,6 +6,13 @@ import bricks 1.0 as Bricks
 Item {
     id: root
 
+    property alias server: serverInputField.text
+    property alias username: usernameInputField.text
+    property alias password: passwordInputField.text
+    property alias remember: rememberCredentials.checked
+
+    signal login
+
     Rectangle {
         id: formBorder
 
@@ -53,6 +60,8 @@ Item {
                 Layout.preferredWidth: 125
             }
             Bricks.InputField {
+                id: serverInputField
+
                 Layout.preferredWidth: 250
             }
             Bricks.Label {
@@ -63,6 +72,8 @@ Item {
                 Layout.preferredWidth: 125
             }
             Bricks.InputField {
+                id: usernameInputField
+
                 Layout.preferredWidth: 150
             }
             Bricks.Label {
@@ -73,11 +84,17 @@ Item {
                 Layout.preferredWidth: 125
             }
             Bricks.InputField {
+                id: passwordInputField
+
                 echoMode: TextInput.Password
 
                 Layout.preferredWidth: 150
+
+                onConfirm: login()
             }
             Bricks.CheckBox {
+                id: rememberCredentials
+
                 text: "Remember credentials"
 
                 Layout.row: 3
@@ -88,6 +105,8 @@ Item {
 
                 Layout.row: 4
                 Layout.column: 1
+
+                onClicked: login()
             }
         }
     }
