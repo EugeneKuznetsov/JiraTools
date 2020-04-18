@@ -6,5 +6,7 @@
         <file>qml/bricks/qmldir</file>
         <file>qml/bricks/InputField.qml</file>
         <file>qml/bricks/Label.qml</file>
+        <file>qml/bricks/ActionButton.qml</file>
+        <file>qml/bricks/CheckBox.qml</file>
     </qresource>
 </RCC>

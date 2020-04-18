@@ -1,3 +1,5 @@
 module bricks
 InputField 1.0 InputField.qml
 Label 1.0 Label.qml
+ActionButton 1.0 ActionButton.qml
+CheckBox 1.0 CheckBox.qml
