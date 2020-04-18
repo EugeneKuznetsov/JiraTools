@@ -7,7 +7,7 @@ int main(int argc, char **argv)
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-        engine.addImportPath(QStringLiteral("qrc:/qml"));
+    engine.addImportPath(QStringLiteral("qrc:/qml"));
     engine.load(QStringLiteral("qrc:/qml/Main.qml"));
 
     return app.exec();
