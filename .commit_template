@@ -1,6 +1,6 @@
 # int main() {  // commit template
 #    QString subj(/* your_subject */);
-#    if (subj.isEmpty() || !subj.endsWith('.') || subj.length() > 50)
+#    if (subj.isEmpty() || subj.endsWith('.') || subj.length() > 50)
 #       exit(BAD_SUBJECT);
 #    sibj[0] = subj[0].toUpper();
 If applied, this commit will _______
