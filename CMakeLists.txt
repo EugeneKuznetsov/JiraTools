@@ -11,7 +11,7 @@ set(CMAKE_AUTORCC ON)
 
 find_package(Qt5 COMPONENTS Gui Qml REQUIRED)
 
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/qml" CACHE STRING "Hello QtCreator! ;-)")
+set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/qml" CACHE INTERNAL "Hello QtCreator! ;-)")
 
 set(sources main.cpp)
 set(resources resources.qrc)
