@@ -7,11 +7,8 @@ Window {
     id: root
 
     visible: true
-    maximumWidth: Screen.width
-    maximumHeight: Screen.height
     minimumWidth: 800
     minimumHeight: 600
-    flags: Qt.WindowCloseButtonHint | Qt.CustomizeWindowHint | Qt.Dialog | Qt.WindowTitleHint | Qt.WindowMinMaxButtonsHint
     color: "#f7f7f7"
 
     StackLayout {
