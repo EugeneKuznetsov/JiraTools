@@ -22,6 +22,7 @@ Controls.CheckBox {
         Rectangle {
             visible: root.checked
             color: "#aeaa9a"
+            radius: 2
 
             anchors {
                 fill: parent
