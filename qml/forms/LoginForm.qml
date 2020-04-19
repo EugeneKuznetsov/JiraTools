@@ -3,22 +3,19 @@ import QtQuick.Layouts 1.14
 import bricks 1.0 as Bricks
 
 Item {
-    id: root
-
-    property alias server: serverInputField.text
-    property alias username: usernameInputField.text
-    property alias password: passwordInputField.text
-    property alias remember: rememberCredentials.checked
+    readonly property alias server: serverInputField.text
+    readonly property alias username: usernameInputField.text
+    readonly property alias password: passwordInputField.text
+    readonly property alias remember: rememberCredentialsCheckBox.checked
+    property alias error: errorMessageLabel.text
 
     signal login()
 
     Rectangle {
-        id: formBorder
-
         anchors.centerIn: parent
         radius: 5
         width: 600
-        height: 300
+        height: 300 + (errorMessageRectangle.visible ? errorMessageRectangle.implicitHeight + 15 : 0)
 
         border {
             width: 1
@@ -37,7 +34,41 @@ Item {
                 left: parent.left
                 right: parent.right
                 topMargin: 20
-                bottomMargin: 20
+            }
+
+        }
+
+        Rectangle {
+            id: errorMessageRectangle
+
+            radius: 3
+            color: "#f7bfbf"
+            visible: errorMessageLabel.text.length > 0
+            implicitHeight: errorMessageLabel.implicitHeight + 10
+
+            anchors {
+                top: welcomeLabel.bottom
+                left: parent.left
+                right: parent.right
+                leftMargin: 25
+                rightMargin: 25
+                topMargin: 15
+            }
+
+            border {
+                width: 1
+                color: "#efefef"
+            }
+
+            Bricks.Label {
+                id: errorMessageLabel
+
+                anchors.centerIn: parent
+                padding: 10
+                width: parent.width
+                horizontalAlignment: Text.AlignLeft
+                font.bold: true
+                wrapMode: Text.WordWrap
             }
 
         }
@@ -50,7 +81,7 @@ Item {
             rowSpacing: 10
 
             anchors {
-                top: welcomeLabel.bottom
+                top: errorMessageRectangle.visible ? errorMessageRectangle.bottom : welcomeLabel.bottom
                 topMargin: 35
                 left: parent.left
                 right: parent.right
@@ -98,7 +129,7 @@ Item {
             }
 
             Bricks.CheckBox {
-                id: rememberCredentials
+                id: rememberCredentialsCheckBox
 
                 text: "Remember credentials"
                 Layout.row: 3
