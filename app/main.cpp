@@ -8,6 +8,7 @@ int main(int argc, char **argv)
 
     QQmlApplicationEngine engine;
     engine.addImportPath(QStringLiteral("qrc:/qml"));
+    engine.addImportPath(QStringLiteral("./imports"));
     engine.load(QStringLiteral("qrc:/qml/Main.qml"));
 
     return app.exec();
