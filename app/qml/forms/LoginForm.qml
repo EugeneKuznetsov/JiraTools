@@ -8,6 +8,7 @@ Item {
     readonly property alias password: passwordInputField.text
     readonly property alias remember: rememberCredentialsCheckBox.checked
     property alias error: errorMessageLabel.text
+    property bool blockLogin: false
 
     signal login()
 
@@ -138,6 +139,7 @@ Item {
 
             Bricks.ActionButton {
                 text: "Login"
+                enabled: !blockLogin
                 Layout.row: 4
                 Layout.column: 1
                 onClicked: login()

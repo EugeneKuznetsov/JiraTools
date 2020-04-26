@@ -8,5 +8,9 @@
         <file>qml/bricks/Label.qml</file>
         <file>qml/bricks/ActionButton.qml</file>
         <file>qml/bricks/CheckBox.qml</file>
+        <file>qml/views/LoginView.qml</file>
+        <file>qml/views/qmldir</file>
+        <file>qml/base/View.qml</file>
+        <file>qml/base/qmldir</file>
     </qresource>
 </RCC>
