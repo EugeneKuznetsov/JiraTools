@@ -1,8 +1,8 @@
 import QtQuick 2.14
-import base 1.0 as Base
+import bricks 1.0 as Bricks
 import forms 1.0 as Forms
 
-Base.View {
+Bricks.View {
     Forms.LoginForm {
         id: loginForm
 
