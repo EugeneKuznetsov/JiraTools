@@ -3,4 +3,6 @@ import QtQuick 2.14
 
 Item {
     property Jira jira
+
+    signal changeViewTo(string viewName)
 }

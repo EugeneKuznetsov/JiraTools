@@ -17,7 +17,8 @@ Bricks.View {
                 blockLogin = false;
                 if (!status.success)
                     error = (status.errors.length) ? status.errors : qsTr("Undocumented error ") + status.code;
-
+                else
+                    changeViewTo("dashboard");
             });
         }
     }
