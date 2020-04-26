@@ -5,21 +5,19 @@ import QtQuick.Window 2.14
 import forms 1.0 as Forms
 
 Window {
-    id: root
-
     visible: true
     minimumWidth: 800
     minimumHeight: 600
     color: "#f7f7f7"
 
-    StackLayout {
-        id: rootLayout
-
+    Loader {
         anchors.fill: parent
+        source: Qt.resolvedUrl("views/LoginView.qml")
+        onLoaded: item.jira = jira
+    }
 
-        Forms.LoginForm {
-        }
-
+    Jira {
+        id: jira
     }
 
 }
