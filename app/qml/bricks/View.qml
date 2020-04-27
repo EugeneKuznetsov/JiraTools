@@ -1,13 +1,6 @@
-import Jira 1.0
 import QtQuick 2.14
+import bricks 1.0 as Bricks
 
-Item {
-    property Jira jira: null
-
+Bricks.JiraItem {
     signal changeViewTo(string viewName)
-    signal ready()
-
-    onJiraChanged: if (jira !== null) {
-        ready();
-    }
 }
