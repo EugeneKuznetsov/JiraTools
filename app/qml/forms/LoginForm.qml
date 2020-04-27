@@ -99,6 +99,7 @@ Item {
                 id: serverInputField
 
                 Layout.preferredWidth: 250
+                text: "http://localhost:2990/jira"
             }
 
             Bricks.Label {
@@ -112,6 +113,7 @@ Item {
                 id: usernameInputField
 
                 Layout.preferredWidth: 150
+                text: "admin"
             }
 
             Bricks.Label {
@@ -127,6 +129,7 @@ Item {
                 echoMode: TextInput.Password
                 Layout.preferredWidth: 150
                 onConfirm: login()
+                text: "admin"
             }
 
             Bricks.CheckBox {
