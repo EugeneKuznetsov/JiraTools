@@ -1,13 +1,24 @@
 import QtQuick 2.14
+import QtQuick.Layouts 1.14
 import bricks 1.0 as Bricks
 import forms 1.0 as Forms
 
 Bricks.View {
-    onReady: {
-        jira.userByUsername(function(status, user) {
-            if (status.success)
-                console.warn("Display name: " + user.displayName)
-        }, jira.options.username);
+    id: root
+
+    ColumnLayout {
+        anchors.fill: parent
+
+        Bricks.TopMenu {
+            jira: root.jira
+            Layout.fillWidth: true
+        }
+
+        Loader {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
+
     }
 
     Connections {

@@ -4,4 +4,5 @@ Label 1.0 Label.qml
 ActionButton 1.0 ActionButton.qml
 CheckBox 1.0 CheckBox.qml
 View 1.0 View.qml
+TopMenu 1.0 TopMenu.qml
 JiraItem 1.0 JiraItem.qml
