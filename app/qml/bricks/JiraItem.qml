@@ -3,10 +3,5 @@ import QtQuick 2.14
 
 Item {
     property Jira jira: null
-
-    signal ready()
-
-    onJiraChanged: if (jira !== null) {
-        ready();
-    }
+    property bool ready: (jira !== null)
 }

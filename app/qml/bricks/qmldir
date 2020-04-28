@@ -6,3 +6,4 @@ CheckBox 1.0 CheckBox.qml
 View 1.0 View.qml
 TopMenu 1.0 TopMenu.qml
 JiraItem 1.0 JiraItem.qml
+SubView 1.0 SubView.qml

@@ -3,7 +3,7 @@ import QtQuick 2.14
 import QtQuick.Layouts 1.14
 import QtQuick.Window 2.14
 import forms 1.0 as Forms
-import views 1.0 as Views
+import utils 1.0 as Utils
 
 Window {
     visible: true
@@ -15,13 +15,13 @@ Window {
         id: viewsLoader
 
         anchors.fill: parent
-        source: Qt.resolvedUrl(Views.Urls.getViewUrl("login"))
+        source: Qt.resolvedUrl(Utils.Urls.getViewUrl("login"))
         onLoaded: item.jira = jira
 
         Connections {
             target: viewsLoader.item
             enabled: viewsLoader.status === Loader.Ready
-            onChangeViewTo: viewsLoader.source = Views.Urls.getViewUrl(viewName)
+            onChangeViewTo: viewsLoader.source = Utils.Urls.getViewUrl(viewName)
         }
 
     }

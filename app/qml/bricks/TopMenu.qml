@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.14
 import bricks 1.0 as Bricks
 
 Bricks.JiraItem {
-    onReady: jira.user(function(status, user) {
+    onReadyChanged: if (ready) jira.user(function(status, user) {
         if (!status.success)
             console.warn(status.errors);
         else

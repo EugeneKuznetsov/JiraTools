@@ -11,9 +11,13 @@
         <file>qml/views/LoginView.qml</file>
         <file>qml/views/qmldir</file>
         <file>qml/bricks/View.qml</file>
-        <file>qml/views/Urls.js</file>
+        <file>qml/bricks/SubView.qml</file>
+        <file>qml/utils/Urls.js</file>
         <file>qml/views/MainView.qml</file>
         <file>qml/bricks/TopMenu.qml</file>
         <file>qml/bricks/JiraItem.qml</file>
+        <file>qml/subviews/qmldir</file>
+        <file>qml/subviews/DashboardSubView.qml</file>
+        <file>qml/utils/qmldir</file>
     </qresource>
 </RCC>
