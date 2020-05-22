@@ -1,4 +1,4 @@
-import Jira 1.0
+import Jira 1.1
 import QtQuick 2.14
 import QtQuick.Layouts 1.14
 import bricks 1.0 as Bricks
@@ -9,7 +9,7 @@ Bricks.JiraItem {
             console.warn(status.errors);
         else
             userAvatar.source = user.avatarUrls["32x32"];
-    }, jira.options.username)
+    }).getUser("", "")
     implicitHeight: 40
 
     Rectangle {

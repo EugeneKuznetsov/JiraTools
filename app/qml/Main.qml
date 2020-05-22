@@ -1,4 +1,4 @@
-import Jira 1.0
+import Jira 1.1
 import QtQuick 2.14
 import QtQuick.Layouts 1.14
 import QtQuick.Window 2.14

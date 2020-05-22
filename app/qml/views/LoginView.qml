@@ -10,16 +10,17 @@ Bricks.View {
         onLogin: {
             error = "";
             blockLogin = true;
-            jira.options.server = server;
-            jira.options.username = username;
-            jira.options.password = password;
-            jira.login(function(status) {
+            jira.server = server;
+            var session = jira.session(function(status) {
                 blockLogin = false;
                 if (!status.success)
                     error = (status.errors.length) ? status.errors : qsTr("Undocumented error ") + status.code;
                 else
                     changeViewTo("main");
             });
+            session.username = username;
+            session.password = password;
+            session.login();
         }
     }
 
