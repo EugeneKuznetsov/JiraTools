@@ -9,4 +9,4 @@ set(sources main.cpp)
 set(resources resources.qrc)
 
 add_executable(${target} ${sources} ${resources})
-target_link_libraries(${target} PRIVATE Qt5::Gui PRIVATE Qt5::Qml PRIVATE qmljiraplugin)
+target_link_libraries(${target} PRIVATE Qt5::Gui PRIVATE Qt5::Qml PRIVATE Qt5::QuickControls2 PRIVATE qmljiraplugin)

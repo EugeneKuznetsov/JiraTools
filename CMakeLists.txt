@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(jiratools VERSION 0.1.0 LANGUAGES CXX)
 
-find_package(Qt5 COMPONENTS Gui Qml REQUIRED)
+find_package(Qt5 REQUIRED COMPONENTS Gui Qml QuickControls2)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
