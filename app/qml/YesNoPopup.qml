@@ -26,7 +26,7 @@ Popup {
         }
 
         Button {
-            text: qsTr("✓ Yes")
+            text: qsTr("\u2713 Yes")
             font.pixelSize: 18
             Layout.preferredHeight: 39
             Layout.minimumWidth: 75
@@ -35,7 +35,7 @@ Popup {
         }
 
         Button {
-            text: qsTr("🗙 No")
+            text: qsTr("\u2717 No")
             font.pixelSize: 18
             Layout.preferredHeight: 39
             Layout.minimumWidth: 75
