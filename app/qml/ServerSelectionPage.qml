@@ -5,100 +5,30 @@ import QtQuick.Layouts 1.14
 
 Page {
     Item {
+        height: 90
         anchors {
             top: parent.top
             left: parent.left
             right: parent.right
-            topMargin: 10
         }
 
-        ColumnLayout {
-            anchors.horizontalCenter: parent.horizontalCenter
+        ErrorMessagePopup {
+            id: networkErrorPopup
 
-            Pane {
-                topPadding: 2
-                bottomPadding: 2
-                //visible: serverUrl.text.startsWith("https")
-                Material.elevation: 3
-                Material.background: Material.color(Material.Grey, Material.Shade800)
+            anchors.centerIn: parent
+        }
 
-                RowLayout {
-                    anchors.fill: parent
-                    spacing: 8
+        YesNoPopup {
+            id: installCertificatePopup
 
-                    Label {
-                        text: qsTr("You might need a CA certificate for this connection. Want to <u>install</u> it?")
-                        elide: Text.ElideRight
-                        font.pixelSize: 18
-                        verticalAlignment: Text.AlignVCenter
-                        Layout.preferredHeight: 39
-                        Layout.preferredWidth: 570
-                    }
-
-                    Button {
-                        text: qsTr("✓ Yes")
-                        font.pixelSize: 18
-                        Layout.preferredHeight: 39
-                        Layout.minimumWidth: 75
-                        Layout.alignment: Qt.AlignVCenter
-                    }
-
-                    Button {
-                        text: qsTr("🗙 No")
-                        font.pixelSize: 18
-                        Layout.preferredHeight: 39
-                        Layout.minimumWidth: 75
-                        Layout.alignment: Qt.AlignVCenter
-                    }
-
-                }
-
-            }
-
-            Pane {
-                topPadding: 2
-                bottomPadding: 2
-                Material.elevation: 3
-                Material.background: Material.color(Material.Grey, Material.Shade800)
-
-                RowLayout {
-                    anchors.fill: parent
-                    spacing: 0
-
-                    Label {
-                        id: errorText
-
-                        text: qsTr("Connection error") // jira.error
-                        elide: Text.ElideRight
-                        font.bold: true
-                        font.pixelSize: 18
-                        color: Material.color(Material.Red, Material.Shade400)
-                        verticalAlignment: Text.AlignVCenter
-                        Layout.preferredWidth: 672
-                        Layout.preferredHeight: 39
-                    }
-
-                    Button {
-                        text: qsTr("OK")
-                        font.pixelSize: 18
-                        Layout.alignment: Qt.AlignRight
-                        Layout.preferredHeight: 39
-                    }
-
-                }
-
-            }
-
+            anchors.centerIn: parent
+            message: qsTr("You might need a CA certificate for this connection. Want to <u>install</u> it?")
         }
 
     }
 
     ColumnLayout {
-        anchors {
-            centerIn: parent
-            left: parent.left
-            right: parent.right
-        }
+        anchors.centerIn: parent
 
         Label {
             text: qsTr("Which Jira server would you like to use today?")
@@ -126,8 +56,6 @@ Page {
         }
 
         RoundButton {
-            id: connectButton
-
             text: qsTr("✓")
             font.pixelSize: 24
             Layout.preferredWidth: 54
