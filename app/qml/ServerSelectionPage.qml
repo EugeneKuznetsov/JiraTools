@@ -5,6 +5,13 @@ import QtQuick.Dialogs 1.3
 import QtQuick.Layouts 1.14
 
 Page {
+
+    function closeAllPopups() {
+        installCertificatePopup.close();
+        installAnotherCertificatePopup.close();
+        errorPopup.close();
+    }
+
     Item {
         height: 90
 
@@ -14,30 +21,35 @@ Page {
             right: parent.right
         }
 
+        // Used for any kind of error (except SSL handshake)
         ErrorMessagePopup {
             id: errorPopup
 
             anchors.centerIn: parent
         }
 
+        // Used for letting the user know that CA certificate
+        // might be needed. Will be suppressed after rejecting
         YesNoPopup {
             id: installCertificatePopup
 
             anchors.centerIn: parent
             message: qsTr("You might need a CA certificate for this connection. Want to <u>install</u> it?")
-            onYes: function () {
+            onYes: function() {
                 close();
                 certificateSelector.open();
             }
             onNo: enabled = false
         }
 
+        // Used for pursuing the user with a request to install
+        // CA certificate. Cannot be suppressed after rejecting
         YesNoPopup {
             id: installAnotherCertificatePopup
 
             anchors.centerIn: parent
             message: qsTr("It seems that your CA certificate is invalid. Want to <u>install</u> another?")
-            onYes: function () {
+            onYes: function() {
                 close();
                 certificateSelector.open();
             }
@@ -59,6 +71,7 @@ Page {
 
             placeholderText: "http://"
             text: JiraProxy.instance.server == "" ? "http://" : JiraProxy.instance.server
+            enabled: !JiraProxy.validating
             font.pixelSize: 26
             color: Material.color(Material.Amber, Material.Shade300)
             horizontalAlignment: Text.AlignHCenter
@@ -67,8 +80,11 @@ Page {
             Layout.maximumWidth: 500
             Layout.alignment: Qt.AlignHCenter
             onAccepted: JiraProxy.setupAndValidateServer(text)
-            onTextEdited: if (text.startsWith("https") && installCertificatePopup.enabled && !installCertificatePopup.opened) {
-                installCertificatePopup.open();
+            onTextEdited: function() {
+                if (text.startsWith("https") && installCertificatePopup.enabled && !installCertificatePopup.opened)
+                    installCertificatePopup.open();
+                else if (text.startsWith("http:"))
+                    closeAllPopups();
             }
 
             validator: RegExpValidator {
@@ -79,6 +95,7 @@ Page {
 
         RoundButton {
             text: qsTr("\u2713")
+            enabled: !JiraProxy.validating
             font.pixelSize: 24
             Layout.preferredWidth: 54
             Layout.alignment: Qt.AlignHCenter
@@ -97,31 +114,31 @@ Page {
         id: certificateSelector
 
         nameFilters: ["*.crt"]
-        onAccepted: function () {
+        onAccepted: function() {
             JiraProxy.instance.caCertificateFile = certificateSelector.fileUrl;
             // there was already an attempt to connect, so
             // let's verify CA certificate and server again
             if (JiraProxy.sslError)
                 JiraProxy.setupAndValidateServer(serverUrl.text);
+
         }
     }
 
     Connections {
         target: JiraProxy
-        onValidatingChanged: if (JiraProxy.validating || JiraProxy.valid) {
-            errorPopup.close();
-            installCertificatePopup.close();
-            installAnotherCertificatePopup.close();
-        } else if (JiraProxy.serverError || !JiraProxy.sslError) {
-            errorPopup.errorText = JiraProxy.lastErrorText;
-            errorPopup.open();
-        } else if (JiraProxy.sslError) {
-            var certPopup = (JiraProxy.instance.caCertificateFile == "") ? installCertificatePopup
-                                                                         : installAnotherCertificatePopup;
-            certPopup.enabled = true;
-            certPopup.open();
-        } else {
-            console.warn("Unknown use case");
+        onValidatingChanged: function() {
+            if (JiraProxy.validating || JiraProxy.valid) {
+                closeAllPopups();
+            } else if (JiraProxy.serverError || !JiraProxy.sslError) {
+                errorPopup.errorText = JiraProxy.lastErrorText;
+                errorPopup.open();
+            } else if (JiraProxy.sslError) {
+                var certPopup = (JiraProxy.instance.caCertificateFile == "") ? installCertificatePopup : installAnotherCertificatePopup;
+                certPopup.enabled = true;
+                certPopup.open();
+            } else {
+                console.warn("Unknown use case");
+            }
         }
     }
 
