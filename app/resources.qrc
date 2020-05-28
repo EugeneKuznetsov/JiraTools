@@ -7,5 +7,6 @@
         <file>qml/ServerSelectionPage.qml</file>
         <file>qml/YesNoPopup.qml</file>
         <file>qml/ErrorMessagePopup.qml</file>
+        <file>qml/JiraProxy.qml</file>
     </qresource>
 </RCC>

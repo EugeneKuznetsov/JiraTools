@@ -1,4 +1,3 @@
-import Jira 1.1
 import QtQuick 2.14
 import QtQuick.Controls 2.14
 
@@ -9,5 +8,6 @@ ApplicationWindow {
 
     StackView {
         anchors.fill: parent
+        initialItem: Qt.resolvedUrl("ServerSelectionPage.qml")
     }
 }

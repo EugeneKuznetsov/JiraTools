@@ -40,7 +40,10 @@ Popup {
             Layout.preferredHeight: 39
             Layout.minimumWidth: 75
             Layout.alignment: Qt.AlignVCenter
-            onReleased: no()
+            onReleased: {
+                no();
+                close();
+            }
         }
 
     }

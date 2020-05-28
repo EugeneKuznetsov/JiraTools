@@ -1,3 +1,4 @@
+singleton JiraProxy 1.0 JiraProxy.qml
 YesNoPopup 1.0 YesNoPopup.qml
 ErrorMessagePopup 1.0 ErrorMessagePopup.qml
 WelcomePage 1.0 WelcomePage.qml
