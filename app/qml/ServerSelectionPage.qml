@@ -25,7 +25,10 @@ Page {
 
             anchors.centerIn: parent
             message: qsTr("You might need a CA certificate for this connection. Want to <u>install</u> it?")
-            onYes: certificateSelector.open()
+            onYes: function () {
+                close();
+                certificateSelector.open();
+            }
             onNo: enabled = false
         }
 
@@ -34,7 +37,10 @@ Page {
 
             anchors.centerIn: parent
             message: qsTr("It seems that your CA certificate is invalid. Want to <u>install</u> another?")
-            onYes: certificateSelector.open()
+            onYes: function () {
+                close();
+                certificateSelector.open();
+            }
         }
 
     }
@@ -72,7 +78,7 @@ Page {
         }
 
         RoundButton {
-            text: qsTr("✓")
+            text: qsTr("\u2713")
             font.pixelSize: 24
             Layout.preferredWidth: 54
             Layout.alignment: Qt.AlignHCenter
@@ -91,36 +97,31 @@ Page {
         id: certificateSelector
 
         nameFilters: ["*.crt"]
-        onAccepted: JiraProxy.instance.caCertificateFile = file
-    }
-
-    Connections {
-        target: JiraProxy.instance
-        onNetworkErrorDetails: function(errorString, sslError) {
-            if (sslError && JiraProxy.instance.caCertificateFile === "") {
-                installCertificatePopup.enabled = true;
-                installCertificatePopup.open();
-            } else if (sslError) {
-                installAnotherCertificatePopup.open();
-            } else {
-                errorPopup.errorText = errorString;
-                errorPopup.open();
-            }
+        onAccepted: function () {
+            JiraProxy.instance.caCertificateFile = certificateSelector.fileUrl;
+            // there was already an attempt to connect, so
+            // let's verify CA certificate and server again
+            if (JiraProxy.sslError)
+                JiraProxy.setupAndValidateServer(serverUrl.text);
         }
     }
 
     Connections {
         target: JiraProxy
-        onValidatingChanged: if (!JiraProxy.validating && !JiraProxy.valid) {
-            errorPopup.errorText = JiraProxy.lastServerError;
-            errorPopup.open();
-        } else if (JiraProxy.validating && (errorPopup.opened || installCertificatePopup.opened || installAnotherCertificatePopup.opened)) {
+        onValidatingChanged: if (JiraProxy.validating || JiraProxy.valid) {
             errorPopup.close();
             installCertificatePopup.close();
             installAnotherCertificatePopup.close();
-        } else if (JiraProxy.valid) {
-            errorPopup.close();
-            installCertificatePopup.close();
+        } else if (JiraProxy.serverError || !JiraProxy.sslError) {
+            errorPopup.errorText = JiraProxy.lastErrorText;
+            errorPopup.open();
+        } else if (JiraProxy.sslError) {
+            var certPopup = (JiraProxy.instance.caCertificateFile == "") ? installCertificatePopup
+                                                                         : installAnotherCertificatePopup;
+            certPopup.enabled = true;
+            certPopup.open();
+        } else {
+            console.warn("Unknown use case");
         }
     }
 
