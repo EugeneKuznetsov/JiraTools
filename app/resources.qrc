@@ -3,5 +3,7 @@
         <file>qml/main.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>qml/WelcomePage.qml</file>
+        <file>qml/qmldir</file>
+        <file>qml/ServerSelectionPage.qml</file>
     </qresource>
 </RCC>
