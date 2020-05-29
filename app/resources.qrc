@@ -3,10 +3,11 @@
         <file>qtquickcontrols2.conf</file>
         <file>qml/qmldir</file>
         <file>qml/main.qml</file>
+        <file>qml/JiraProxy.qml</file>
+        <file>qml/MenuStateMachine.qml</file>
         <file>qml/WelcomePage.qml</file>
         <file>qml/ServerSelectionPage.qml</file>
         <file>qml/YesNoPopup.qml</file>
         <file>qml/ErrorMessagePopup.qml</file>
-        <file>qml/JiraProxy.qml</file>
     </qresource>
 </RCC>

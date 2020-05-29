@@ -12,6 +12,6 @@ ApplicationWindow {
 
     StackView {
         anchors.fill: parent
-        initialItem: Qt.resolvedUrl("ServerSelectionPage.qml")
+        Component.onCompleted: MenuStateMachine.mainView = this
     }
 }

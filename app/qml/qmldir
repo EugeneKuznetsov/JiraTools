@@ -1,4 +1,5 @@
 singleton JiraProxy 1.0 JiraProxy.qml
+singleton MenuStateMachine 1.0 MenuStateMachine.qml
 YesNoPopup 1.0 YesNoPopup.qml
 ErrorMessagePopup 1.0 ErrorMessagePopup.qml
 WelcomePage 1.0 WelcomePage.qml
