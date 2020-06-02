@@ -31,11 +31,10 @@ QtObject {
             id: serverSetup
 
             initialState: serverSelectionPage
+            onEntered: mainView.replace(Qt.resolvedUrl("ServerSelectionPage.qml"))
 
             DSM.State {
                 id: serverSelectionPage
-
-                onEntered: mainView.replace(Qt.resolvedUrl("ServerSelectionPage.qml"))
 
                 DSM.SignalTransition {
                     targetState: credentialsInputPage
@@ -50,6 +49,17 @@ QtObject {
                 onEntered: mainView.push(Qt.resolvedUrl("CredentialsInputPage.qml"))
             }
 
+            DSM.SignalTransition {
+                targetState: serverSelectionPage
+                signal: currentPage.prevPage
+            }
+
+        }
+
+        // default handler for all "back" transitions
+        DSM.SignalTransition {
+            signal: currentPage.prevPage
+            onTriggered: mainView.pop()
         }
 
     }
