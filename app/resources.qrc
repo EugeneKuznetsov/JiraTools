@@ -11,5 +11,6 @@
         <file>qml/WelcomePage.qml</file>
         <file>qml/ServerSelectionPage.qml</file>
         <file>qml/CredentialsInputPage.qml</file>
+        <file>qml/HomePage.qml</file>
     </qresource>
 </RCC>
