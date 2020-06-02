@@ -13,13 +13,12 @@ PageBase {
     }
 
     Item {
-        height: 90
-
         anchors {
             top: parent.top
             left: parent.left
             right: parent.right
         }
+        height: 90
 
         // Used for any kind of error (except SSL handshake)
         ErrorMessagePopup {
@@ -124,7 +123,7 @@ PageBase {
 
     Connections {
         target: JiraProxy
-        onValidatingChanged: function() {
+        onValidatingChanged: {
             if (JiraProxy.validating) {
                 closeAllPopups();
             } else if (JiraProxy.valid) {

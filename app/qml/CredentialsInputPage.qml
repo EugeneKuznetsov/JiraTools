@@ -7,13 +7,12 @@ PageBase {
     backButton: true
 
     Item {
-        height: 90
-
         anchors {
             top: parent.top
             left: parent.left
             right: parent.right
         }
+        height: 90
 
         ErrorMessagePopup {
             id: errorPopup
@@ -47,6 +46,8 @@ PageBase {
                     anchors.verticalCenter: parent.verticalCenter
                     text: "Go anonymous"
                     font.pixelSize: 16
+                    enabled: !JiraProxy.authenticating
+                    onReleased: nextPage()
                 }
 
             }
@@ -62,29 +63,40 @@ PageBase {
                 spacing: 5
 
                 TextField {
+                    id: username
+
                     Layout.fillWidth: true
                     placeholderText: qsTr("Username")
                     font.pixelSize: 18
                     color: Material.color(Material.Amber, Material.Shade300)
+                    enabled: !JiraProxy.authenticating
+                    onAccepted: password.forceActiveFocus()
                 }
 
                 TextField {
+                    id: password
+
                     Layout.fillWidth: true
                     placeholderText: qsTr("Password")
                     font.pixelSize: 18
                     echoMode: TextInput.Password
                     color: Material.color(Material.Amber, Material.Shade300)
+                    enabled: !JiraProxy.authenticating
+                    onAccepted: JiraProxy.authenticate(username.text, password.text)
                 }
 
                 RowLayout {
                     Button {
                         text: qsTr("Login")
                         font.pixelSize: 16
+                        enabled: !JiraProxy.authenticating
+                        onReleased: JiraProxy.authenticate(username.text, password.text)
                     }
 
                     CheckBox {
                         text: qsTr("Remember me")
                         font.pixelSize: 16
+                        enabled: !JiraProxy.authenticating
                     }
 
                 }
@@ -101,6 +113,7 @@ PageBase {
             topMargin: 30
             horizontalCenter: mainLayout.horizontalCenter
         }
+        running: JiraProxy.authenticating
 
     }
 
@@ -115,6 +128,22 @@ PageBase {
             font.underline: true
         }
 
+    }
+
+    Connections {
+        target: JiraProxy
+        onAuthenticatingChanged: {
+            if (JiraProxy.authenticating) {
+                errorPopup.close();
+            } else if (JiraProxy.authenticated) {
+                nextPage();
+            } else if (JiraProxy.serverError || JiraProxy.networkError) {
+                errorPopup.errorText = JiraProxy.lastErrorText;
+                errorPopup.open();
+            } else {
+                console.warn("Unknown use case?");
+            }
+        }
     }
 
 }
