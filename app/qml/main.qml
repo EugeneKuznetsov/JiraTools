@@ -5,7 +5,7 @@ ApplicationWindow {
     visible: true
     minimumWidth: 800
     minimumHeight: 600
-    title: qsTr("Jira Tools") + JiraProxy.valid ? JiraProxy.serverPrettyTitle : qsTr("No server selected")
+    title: qsTr("Jira Tools - ") + (JiraProxy.valid ? JiraProxy.serverPrettyTitle : qsTr("No server selected"))
 
     StackView {
         id: mainView
