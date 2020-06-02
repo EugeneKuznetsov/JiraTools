@@ -56,10 +56,10 @@ QtObject {
                 _internal.serverError = true;
                 _internal.lastErrorText = qsTr("Not a valid Jira server");
             } else {
-                _internal.serverTitle = info["serverTitle"];
-                _internal.serverVersion = info["version"];
-                _internal.serverDeployment = info["deploymentType"];
                 console.debug(JSON.stringify(info));
+                _internal.serverTitle = info.hasOwnProperty("serverTitle") ? info["serverTitle"] : "";
+                _internal.serverVersion = info.hasOwnProperty("version") ? info["version"] : "";
+                _internal.serverDeployment = info.hasOwnProperty("deploymentType") ? info["deploymentType"] : "";
             }
             _internal.valid = status.success;
             _internal.validating = false;
@@ -72,8 +72,6 @@ QtObject {
             if (!status.success) {
                 _internal.serverError = true;
                 _internal.lastErrorText = status.errors;
-            } else {
-                console.debug(JSON.stringify())
             }
             _internal.authenticated = status.success;
             _internal.authenticating = false;
