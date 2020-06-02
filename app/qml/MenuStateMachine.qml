@@ -39,14 +39,13 @@ QtObject {
                 DSM.SignalTransition {
                     targetState: credentialsInputPage
                     signal: currentPage.nextPage
+                    onTriggered: mainView.push(Qt.resolvedUrl("CredentialsInputPage.qml"))
                 }
 
             }
 
             DSM.State {
                 id: credentialsInputPage
-
-                onEntered: mainView.push(Qt.resolvedUrl("CredentialsInputPage.qml"))
             }
 
             DSM.SignalTransition {
