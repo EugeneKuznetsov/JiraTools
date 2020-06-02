@@ -5,8 +5,13 @@ pragma Singleton
 
 QtObject {
     property StackView mainView: null
+    readonly property PageBase currentPage: mainView && mainView.currentItem ? mainView.currentItem : instance.emptyPage
     readonly property DSM.StateMachine
     instance: DSM.StateMachine {
+        readonly property PageBase
+        emptyPage: PageBase {
+        }
+
         running: mainView
         initialState: welcomePage
 
@@ -31,6 +36,18 @@ QtObject {
                 id: serverSelectionPage
 
                 onEntered: mainView.replace(Qt.resolvedUrl("ServerSelectionPage.qml"))
+
+                DSM.SignalTransition {
+                    targetState: credentialsInputPage
+                    signal: currentPage.nextPage
+                }
+
+            }
+
+            DSM.State {
+                id: credentialsInputPage
+
+                onEntered: mainView.push(Qt.resolvedUrl("CredentialsInputPage.qml"))
             }
 
         }

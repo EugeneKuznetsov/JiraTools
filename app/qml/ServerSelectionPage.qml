@@ -4,7 +4,7 @@ import QtQuick.Controls.Material 2.14
 import QtQuick.Dialogs 1.3
 import QtQuick.Layouts 1.14
 
-Page {
+PageBase {
 
     function closeAllPopups() {
         installCertificatePopup.close();
@@ -41,7 +41,7 @@ Page {
 
         // ToDo: consider merging installCertificatePopup into
         // a more generic popup covering both cases of SSL
-        // certificates installation... Perhaps, use states
+        // certificates installation... Perhaps, use states.
         //
         // Used for pursuing the user with a request to install
         // CA certificate. Cannot be suppressed after rejecting
@@ -83,6 +83,7 @@ Page {
                     installCertificatePopup.open();
                 else if (text.startsWith("http:"))
                     closeAllPopups();
+
             }
             validator: RegExpValidator {
                 regExp: RegExp("^(http|https)://.*")
@@ -124,8 +125,10 @@ Page {
     Connections {
         target: JiraProxy
         onValidatingChanged: function() {
-            if (JiraProxy.validating || JiraProxy.valid) {
+            if (JiraProxy.validating) {
                 closeAllPopups();
+            } else if (JiraProxy.valid) {
+                nextPage();
             } else if (JiraProxy.serverError || !JiraProxy.sslError) {
                 errorPopup.errorText = JiraProxy.lastErrorText;
                 errorPopup.open();
