@@ -17,29 +17,32 @@ Popup {
         spacing: 8
 
         Label {
+            Layout.preferredHeight: 39
+            Layout.preferredWidth: 570
+            verticalAlignment: Text.AlignVCenter
             text: message
             elide: Text.ElideRight
             font.pixelSize: 18
-            verticalAlignment: Text.AlignVCenter
-            Layout.preferredHeight: 39
-            Layout.preferredWidth: 570
         }
 
         Button {
+            Layout.preferredHeight: 39
+            Layout.minimumWidth: 75
+            Layout.alignment: Qt.AlignVCenter
             text: qsTr("\u2713 Yes")
             font.pixelSize: 18
-            Layout.preferredHeight: 39
-            Layout.minimumWidth: 75
-            Layout.alignment: Qt.AlignVCenter
-            onReleased: yes()
+            onReleased: {
+                yes();
+                close();
+            }
         }
 
         Button {
-            text: qsTr("\u2717 No")
-            font.pixelSize: 18
             Layout.preferredHeight: 39
             Layout.minimumWidth: 75
             Layout.alignment: Qt.AlignVCenter
+            text: qsTr("\u2717 No")
+            font.pixelSize: 18
             onReleased: {
                 no();
                 close();

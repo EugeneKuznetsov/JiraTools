@@ -4,18 +4,19 @@ pragma Singleton
 
 QtObject {
     property Jira instance
-    readonly property bool validating: _int.validating
-    readonly property bool valid: _int.valid
-    readonly property bool networkError: _int.networkError
-    readonly property bool sslError: _int.sslError
-    readonly property bool serverError: _int.serverError
-    readonly property string lastErrorText: _int.lastErrorText
-    readonly property string serverTitle: _int.serverTitle
-    readonly property string serverVersion: _int.serverVersion
-    readonly property string serverType: _int.serverDeployment
+    readonly property bool validating: _internal.validating
+    readonly property bool valid: _internal.valid
+    readonly property bool networkError: _internal.networkError
+    readonly property bool sslError: _internal.sslError
+    readonly property bool serverError: _internal.serverError
+    readonly property string lastErrorText: _internal.lastErrorText
+    readonly property string serverPrettyTitle: "%1 %2 (%3)".arg(serverTitle).arg(serverType).arg(serverVersion)
+    readonly property string serverTitle: _internal.serverTitle
+    readonly property string serverVersion: _internal.serverVersion
+    readonly property string serverType: _internal.serverDeployment
     readonly property QtObject
     internals: QtObject {
-        id: _int
+        id: _internal
 
         property bool validating: false
         property bool valid: false
@@ -28,42 +29,42 @@ QtObject {
         property string serverDeployment: ""
 
         function reset() {
-            _int.validating = true;
-            _int.valid = false;
-            _int.networkError = false;
-            _int.sslError = false;
-            _int.serverError = false;
-            _int.lastErrorText = "";
-            _int.serverTitle = "";
-            _int.serverVersion = "";
-            _int.serverDeployment = "";
+            _internal.validating = true;
+            _internal.valid = false;
+            _internal.networkError = false;
+            _internal.sslError = false;
+            _internal.serverError = false;
+            _internal.lastErrorText = "";
+            _internal.serverTitle = "";
+            _internal.serverVersion = "";
+            _internal.serverDeployment = "";
         }
     }
 
     function setupAndValidateServer(serverUrl) {
-        _int.reset();
+        _internal.reset();
         instance.server = serverUrl;
         instance.serverInfo(function(status, info) {
             if (!status.success) {
-                _int.serverError = true;
-                _int.lastErrorText = "Not a valid Jira server";
+                _internal.serverError = true;
+                _internal.lastErrorText = qsTr("Not a valid Jira server");
             } else {
-                _int.serverTitle = info["serverTitle"];
-                _int.serverVersion = info["version"];
-                _int.serverDeployment = info["deploymentType"];
+                _internal.serverTitle = info["serverTitle"];
+                _internal.serverVersion = info["version"];
+                _internal.serverDeployment = info["deploymentType"];
                 console.log(JSON.stringify(info));
             }
-            _int.valid = status.success;
-            _int.validating = false;
+            _internal.valid = status.success;
+            _internal.validating = false;
         }).getServerInfo();
     }
 
     instance: Jira {
         onNetworkErrorDetails: function (errorString, sslError) {
-            _int.lastErrorText = errorString;
-            _int.networkError = true;
-            _int.sslError = sslError;
-            _int.validating = false;
+            _internal.lastErrorText = errorString;
+            _internal.networkError = true;
+            _internal.sslError = sslError;
+            _internal.validating = false;
         }
     }
 

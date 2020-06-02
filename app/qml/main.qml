@@ -5,13 +5,13 @@ ApplicationWindow {
     visible: true
     minimumWidth: 800
     minimumHeight: 600
-    title: JiraProxy.serverVersion != "" ? (qsTr("Jira ") + JiraProxy.serverType
-                                            + " (" + JiraProxy.serverVersion + ") - "
-                                            + JiraProxy.serverTitle )
-                                         : qsTr("Jira Tools")
+    title: qsTr("Jira Tools") + JiraProxy.valid ? JiraProxy.serverPrettyTitle : qsTr("No server selected")
 
     StackView {
+        id: mainView
+
         anchors.fill: parent
-        Component.onCompleted: MenuStateMachine.mainView = this
     }
+
+    Component.onCompleted: MenuStateMachine.mainView = mainView
 }

@@ -35,13 +35,14 @@ Page {
 
             anchors.centerIn: parent
             message: qsTr("You might need a CA certificate for this connection. Want to <u>install</u> it?")
-            onYes: function() {
-                close();
-                certificateSelector.open();
-            }
-            onNo: enabled = false
+            onYes: certificateSelector.open()
+            onNo: installCertificatePopup.enabled = false
         }
 
+        // ToDo: consider merging installCertificatePopup into
+        // a more generic popup covering both cases of SSL
+        // certificates installation... Perhaps, use states
+        //
         // Used for pursuing the user with a request to install
         // CA certificate. Cannot be suppressed after rejecting
         YesNoPopup {
@@ -49,10 +50,7 @@ Page {
 
             anchors.centerIn: parent
             message: qsTr("It seems that your CA certificate is invalid. Want to <u>install</u> another?")
-            onYes: function() {
-                close();
-                certificateSelector.open();
-            }
+            onYes: certificateSelector.open()
         }
 
     }
@@ -61,32 +59,31 @@ Page {
         anchors.centerIn: parent
 
         Label {
+            Layout.alignment: Qt.AlignHCenter
             text: qsTr("Which Jira server would you like to use today?")
             font.pixelSize: 36
-            Layout.alignment: Qt.AlignHCenter
         }
 
         TextField {
             id: serverUrl
 
-            placeholderText: "http://"
-            text: JiraProxy.instance.server == "" ? "http://" : JiraProxy.instance.server
-            enabled: !JiraProxy.validating
-            font.pixelSize: 26
-            color: Material.color(Material.Amber, Material.Shade300)
-            horizontalAlignment: Text.AlignHCenter
             Layout.minimumWidth: 300
             Layout.preferredWidth: serverUrl.contentWidth
             Layout.maximumWidth: 500
             Layout.alignment: Qt.AlignHCenter
+            horizontalAlignment: Text.AlignHCenter
+            placeholderText: "http://"
+            text: JiraProxy.instance.server
+            enabled: !JiraProxy.validating
+            font.pixelSize: 26
+            color: Material.color(Material.Amber, Material.Shade300)
             onAccepted: JiraProxy.setupAndValidateServer(text)
-            onTextEdited: function() {
+            onTextEdited: {
                 if (text.startsWith("https") && installCertificatePopup.enabled && !installCertificatePopup.opened)
                     installCertificatePopup.open();
                 else if (text.startsWith("http:"))
                     closeAllPopups();
             }
-
             validator: RegExpValidator {
                 regExp: RegExp("^(http|https)://.*")
             }
@@ -94,11 +91,11 @@ Page {
         }
 
         RoundButton {
+            Layout.preferredWidth: 54
+            Layout.alignment: Qt.AlignHCenter
             text: qsTr("\u2713")
             enabled: !JiraProxy.validating
             font.pixelSize: 24
-            Layout.preferredWidth: 54
-            Layout.alignment: Qt.AlignHCenter
             onReleased: JiraProxy.setupAndValidateServer(serverUrl.text)
 
             BusyIndicator {
@@ -137,7 +134,7 @@ Page {
                 certPopup.enabled = true;
                 certPopup.open();
             } else {
-                console.warn("Unknown use case");
+                console.warn("Unknown use case?");
             }
         }
     }

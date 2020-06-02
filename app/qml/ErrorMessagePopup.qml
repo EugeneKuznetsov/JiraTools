@@ -16,21 +16,21 @@ Popup {
         spacing: 0
 
         Label {
+            Layout.preferredWidth: 672
+            Layout.preferredHeight: 39
+            verticalAlignment: Text.AlignVCenter
             text: errorText
             elide: Text.ElideRight
             font.bold: true
             font.pixelSize: 18
             color: Material.color(Material.Red, Material.Shade400)
-            verticalAlignment: Text.AlignVCenter
-            Layout.preferredWidth: 672
-            Layout.preferredHeight: 39
         }
 
         Button {
-            text: qsTr("OK")
-            font.pixelSize: 18
             Layout.alignment: Qt.AlignRight
             Layout.preferredHeight: 39
+            text: qsTr("OK")
+            font.pixelSize: 18
             onReleased: {
                 ok();
                 close();
