@@ -44,7 +44,7 @@ PageBase {
                 Button {
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
-                    text: "Go anonymous"
+                    text: qsTr("Go anonymous")
                     font.pixelSize: 16
                     enabled: !JiraProxy.authenticating
                     onReleased: nextPage()

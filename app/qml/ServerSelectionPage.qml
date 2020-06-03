@@ -121,24 +121,43 @@ PageBase {
         }
     }
 
-    Connections {
-        target: JiraProxy
-        onValidatingChanged: {
-            if (JiraProxy.validating) {
-                closeAllPopups();
-            } else if (JiraProxy.valid) {
-                nextPage();
-            } else if (JiraProxy.serverError || !JiraProxy.sslError) {
-                errorPopup.errorText = JiraProxy.lastErrorText;
-                errorPopup.open();
-            } else if (JiraProxy.sslError) {
-                var certPopup = (JiraProxy.instance.caCertificateFile == "") ? installCertificatePopup : installAnotherCertificatePopup;
-                certPopup.enabled = true;
-                certPopup.open();
-            } else {
-                console.warn("Unknown use case?");
+    states: [
+        State {
+            name: "Validation Process Running"
+            when: JiraProxy.validating
+            StateChangeScript {
+                script: closeAllPopups()
+            }
+        },
+        State {
+            name: "Jira server is Valid"
+            when: JiraProxy.valid
+            StateChangeScript {
+                script: nextPage()
+            }
+        },
+        State {
+            name: "Any error except SSL handshake error"
+            when: JiraProxy.serverError || (JiraProxy.networkError && !JiraProxy.sslError)
+            StateChangeScript {
+                script: {
+                    errorPopup.errorText = JiraProxy.lastErrorText;
+                    errorPopup.open();
+                }
+            }
+        },
+        State {
+            name: "SSL handshake error"
+            when: JiraProxy.sslError
+            StateChangeScript {
+                script: {
+                    var certPopup = (JiraProxy.instance.caCertificateFile == "") ? installCertificatePopup : installAnotherCertificatePopup;
+                    certPopup.enabled = true;
+                    certPopup.open();
+                }
             }
         }
-    }
+
+    ]
 
 }
