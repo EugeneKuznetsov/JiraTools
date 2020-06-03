@@ -2,7 +2,7 @@ import Jira 1.1
 import QtQuick 2.14
 pragma Singleton
 
-QtObject {
+Item {
     property Jira instance
     readonly property bool authenticating: _internal.authenticating
     readonly property bool authenticated: _internal.authenticated
@@ -16,36 +16,6 @@ QtObject {
     readonly property string serverTitle: _internal.serverTitle
     readonly property string serverVersion: _internal.serverVersion
     readonly property string serverType: _internal.serverDeployment
-    readonly property QtObject
-    internals: QtObject {
-        id: _internal
-
-        property bool authenticating: false
-        property bool authenticated: false
-        property bool validating: false
-        property bool valid: false
-        property bool networkError: false
-        property bool sslError: false
-        property bool serverError: false
-        property string lastErrorText: ""
-        property string serverTitle: ""
-        property string serverVersion: ""
-        property string serverDeployment: ""
-
-        function reset() {
-            _internal.authenticating = false;
-            _internal.authenticated = false;
-            _internal.validating = false;
-            _internal.valid = false;
-            _internal.networkError = false;
-            _internal.sslError = false;
-            _internal.serverError = false;
-            _internal.lastErrorText = "";
-            _internal.serverTitle = "";
-            _internal.serverVersion = "";
-            _internal.serverDeployment = "";
-        }
-    }
 
     function setupAndValidateServer(serverUrl) {
         _internal.reset();
@@ -81,8 +51,39 @@ QtObject {
         session.login();
     }
 
+    QtObject {
+        id: _internal
+
+        property bool authenticating: false
+        property bool authenticated: false
+        property bool validating: false
+        property bool valid: false
+        property bool networkError: false
+        property bool sslError: false
+        property bool serverError: false
+        property string lastErrorText: ""
+        property string serverTitle: ""
+        property string serverVersion: ""
+        property string serverDeployment: ""
+
+        function reset() {
+            _internal.authenticating = false;
+            _internal.authenticated = false;
+            _internal.validating = false;
+            _internal.valid = false;
+            _internal.networkError = false;
+            _internal.sslError = false;
+            _internal.serverError = false;
+            _internal.lastErrorText = "";
+            _internal.serverTitle = "";
+            _internal.serverVersion = "";
+            _internal.serverDeployment = "";
+        }
+
+    }
+
     instance: Jira {
-        onNetworkErrorDetails: function (errorString, sslError) {
+        onNetworkErrorDetails: function(errorString, sslError) {
             _internal.lastErrorText = errorString;
             _internal.networkError = true;
             _internal.sslError = sslError;

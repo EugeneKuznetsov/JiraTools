@@ -111,7 +111,7 @@ PageBase {
         id: certificateSelector
 
         nameFilters: ["*.crt"]
-        onAccepted: function() {
+        onAccepted: {
             JiraProxy.instance.caCertificateFile = certificateSelector.fileUrl;
             // there was already an attempt to connect, so
             // let's verify CA certificate and server again
