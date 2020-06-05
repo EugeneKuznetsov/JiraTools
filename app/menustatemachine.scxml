@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="menustatemachine" qt:editorversion="4.12.2" datamodel="ecmascript" initial="Welcome">
+    <qt:editorinfo initialGeometry="147.38;81.94;-20;-20;40;40"/>
+    <state id="Welcome">
+        <qt:editorinfo geometry="199.23;424.18;-160;-221.74;214.77;123.56" scenegeometry="199.23;424.18;39.23;202.44;214.77;123.56"/>
+        <onentry>
+            <send event="replace">
+                <param name="page" expr="'WelcomePage.qml'"/>
+            </send>
+            <send delay="1500ms" event="startSetup"/>
+        </onentry>
+        <transition type="internal" event="startSetup" target="Setup_Server"/>
+    </state>
+    <state id="Setup_Server">
+        <qt:editorinfo geometry="474.18;124.75;-80.16;41.85;558.91;195.23" scenegeometry="474.18;124.75;394.02;166.60;558.91;195.23"/>
+        <onentry>
+            <send event="replace">
+                <param name="page" expr="'ServerSelectionPage.qml'"/>
+            </send>
+        </onentry>
+        <state id="ServerSelection">
+            <qt:editorinfo geometry="3.93;160.41;-60;-50;197;100" scenegeometry="477.09;307.83;417.09;257.83;197;100"/>
+            <transition type="external" event="nextPage" target="CredentialsInput">
+                <qt:editorinfo startTargetFactors="92.90;39.62" endTargetFactors="6.26;41.95" movePoint="41.96;6.14"/>
+            </transition>
+        </state>
+        <state id="CredentialsInput">
+            <qt:editorinfo geometry="324.75;157.88;-60;-50;194;100" scenegeometry="798.93;282.63;738.93;232.63;194;100"/>
+            <onentry>
+                <send event="push">
+                    <param name="page" expr="'CredentialsInputPage.qml'"/>
+                </send>
+            </onentry>
+            <transition type="external" event="prevPage" target="ServerSelection">
+                <qt:editorinfo startTargetFactors="5.30;72.82" endTargetFactors="94.30;68.83" movePoint="-19.44;8.18"/>
+                <send event="pop"/>
+            </transition>
+            <transition type="external" event="nextPage" target="Home">
+                <qt:editorinfo endTargetFactors="86.61;20" movePoint="37.87;40.94"/>
+            </transition>
+        </state>
+    </state>
+    <state id="Home">
+        <qt:editorinfo geometry="169.89;482.05;-124.84;-50;914.98;100" scenegeometry="169.89;482.05;45.05;432.05;914.98;100"/>
+        <onentry>
+            <send event="replace">
+                <param name="page" expr="'HomePage.qml'"/>
+            </send>
+        </onentry>
+    </state>
+</scxml>

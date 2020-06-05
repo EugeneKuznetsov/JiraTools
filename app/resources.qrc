@@ -12,5 +12,6 @@
         <file>qml/ServerSelectionPage.qml</file>
         <file>qml/CredentialsInputPage.qml</file>
         <file>qml/HomePage.qml</file>
+        <file>menustatemachine.scxml</file>
     </qresource>
 </RCC>
