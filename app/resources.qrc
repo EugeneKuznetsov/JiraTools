@@ -13,5 +13,6 @@
         <file>qml/CredentialsInputPage.qml</file>
         <file>qml/HomePage.qml</file>
         <file>menustatemachine.scxml</file>
+        <file>qml/MainMenuPane.qml</file>
     </qresource>
 </RCC>

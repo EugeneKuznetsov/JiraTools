@@ -1,6 +1,5 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
-import QtQuick.Controls.Material 2.14
 import QtQuick.Layouts 1.14
 
 ApplicationWindow {
@@ -12,13 +11,12 @@ ApplicationWindow {
     RowLayout {
         anchors.fill: parent
 
-        Pane {
+        MainMenuPane {
             id: mainMenu
 
             Layout.preferredWidth: 60
             Layout.fillHeight: true
             visible: false
-            Material.background: Material.color(Material.Grey, Material.Shade800)
         }
 
         StackView {
