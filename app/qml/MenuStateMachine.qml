@@ -4,6 +4,7 @@ import QtQuick.Controls 2.14
 pragma Singleton
 
 Item {
+    property Pane mainMenu: null
     property StackView mainView: null
     property StateMachine instance: scxmlLoader.stateMachine
 
@@ -27,6 +28,16 @@ Item {
             mainView.push(event.data.page);
         } else if (event.name === "pop") {
             mainView.pop();
+        }
+    }
+
+    EventConnection {
+        stateMachine: instance
+        events: ["showMenu", "hideMenu"]
+        onOccurred: if (event.name === "showMenu") {
+            mainMenu.visible = true;
+        } else if (event.name === "hideMenu") {
+            mainMenu.visible = false;
         }
     }
 }

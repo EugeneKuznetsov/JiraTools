@@ -19,7 +19,7 @@
             </send>
         </onentry>
         <state id="ServerSelection">
-            <qt:editorinfo geometry="3.93;160.41;-60;-50;197;100" scenegeometry="477.09;307.83;417.09;257.83;197;100"/>
+            <qt:editorinfo geometry="3.93;160.41;-60;-50;197;100" scenegeometry="478.11;285.16;418.11;235.16;197;100"/>
             <transition type="external" event="nextPage" target="CredentialsInput">
                 <qt:editorinfo startTargetFactors="92.90;39.62" endTargetFactors="6.26;41.95" movePoint="41.96;6.14"/>
             </transition>
@@ -46,6 +46,10 @@
             <send event="replace">
                 <param name="page" expr="'HomePage.qml'"/>
             </send>
+            <send event="showMenu"/>
         </onentry>
+        <onexit>
+            <send event="hideMenu"/>
+        </onexit>
     </state>
 </scxml>
