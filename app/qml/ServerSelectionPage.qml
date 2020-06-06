@@ -94,7 +94,7 @@ PageBase {
             text: qsTr("\u2713")
             enabled: !JiraProxy.validating
             font.pixelSize: 24
-            onReleased: if (serverUrl.validator.Acceptable) {
+            onReleased: if (serverUrl.acceptableInput) {
                 JiraProxy.setupAndValidateServer(serverUrl.text);
             } else {
                 errorPopup.errorText = qsTr("Invalid URL")
