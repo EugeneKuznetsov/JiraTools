@@ -96,6 +96,7 @@ PageBase {
                     CheckBox {
                         text: qsTr("Remember me")
                         font.pixelSize: 16
+                        visible: false  // remove after implementing this feature
                         enabled: !JiraProxy.authenticating
                     }
 
