@@ -12,7 +12,7 @@
         <transition type="internal" event="startSetup" target="Setup_Server"/>
     </state>
     <state id="Setup_Server">
-        <qt:editorinfo geometry="474.18;124.75;-80.16;41.85;558.91;195.23" scenegeometry="474.18;124.75;394.02;166.60;558.91;195.23"/>
+        <qt:editorinfo geometry="541.43;124.75;-80.16;41.85;558.91;195.23" scenegeometry="541.43;124.75;461.27;166.60;558.91;195.23"/>
         <onentry>
             <send event="replace">
                 <param name="page" expr="'ServerSelectionPage.qml'"/>
@@ -21,7 +21,7 @@
         <state id="ServerSelection">
             <qt:editorinfo geometry="3.93;160.41;-60;-50;197;100" scenegeometry="478.11;285.16;418.11;235.16;197;100"/>
             <transition type="external" event="nextPage" target="CredentialsInput">
-                <qt:editorinfo startTargetFactors="92.90;39.62" endTargetFactors="6.26;41.95" movePoint="41.96;6.14"/>
+                <qt:editorinfo movePoint="41.96;6.14" endTargetFactors="6.26;41.95" startTargetFactors="92.90;39.62"/>
             </transition>
         </state>
         <state id="CredentialsInput">
@@ -32,16 +32,16 @@
                 </send>
             </onentry>
             <transition type="external" event="prevPage" target="ServerSelection">
-                <qt:editorinfo startTargetFactors="5.30;72.82" endTargetFactors="94.30;68.83" movePoint="-19.44;8.18"/>
+                <qt:editorinfo movePoint="-19.44;8.18" endTargetFactors="94.30;68.83" startTargetFactors="5.30;72.82"/>
                 <send event="pop"/>
             </transition>
             <transition type="external" event="nextPage" target="Home">
-                <qt:editorinfo endTargetFactors="86.61;20" movePoint="37.87;40.94"/>
+                <qt:editorinfo movePoint="24.56;29.68" endTargetFactors="86.61;20"/>
             </transition>
         </state>
     </state>
     <state id="Home">
-        <qt:editorinfo geometry="169.89;482.05;-124.84;-50;914.98;100" scenegeometry="169.89;482.05;45.05;432.05;914.98;100"/>
+        <qt:editorinfo geometry="263.22;571.33;-315.40;-159.67;1105.54;322.38" scenegeometry="263.22;571.33;-52.18;411.66;1105.54;322.38"/>
         <onentry>
             <send event="replace">
                 <param name="page" expr="'HomePage.qml'"/>
@@ -51,5 +51,27 @@
         <onexit>
             <send event="hideMenu"/>
         </onexit>
+        <state id="Tools_Overview">
+            <qt:editorinfo geometry="-70.61;-10.24;-127;-50;275.38;100" scenegeometry="119.75;570.06;-7.25;520.06;275.38;100"/>
+            <transition type="external" event="activatePage" target="Agile_Board" cond="_event.data.pageId === 'BoardSelection'">
+                <qt:editorinfo endTargetFactors="1.88;28.63"/>
+            </transition>
+            <transition type="internal" event="prevPage"/>
+        </state>
+        <state id="Agile_Board">
+            <qt:editorinfo geometry="272.24;-10.18;-60;-90.15;556.36;240.52" scenegeometry="462.60;570.12;402.60;479.97;556.36;240.52"/>
+            <onentry>
+                <send event="push">
+                    <param name="page" expr="'BoardSelectionPage.qml'"/>
+                </send>
+            </onentry>
+            <state id="BoardSelection">
+                <qt:editorinfo geometry="32.75;14.28;-60;-50;189.96;100" scenegeometry="495.35;584.40;435.35;534.40;189.96;100"/>
+            </state>
+        </state>
+        <transition type="external" event="prevPage" target="Tools_Overview">
+            <qt:editorinfo movePoint="-9.22;7.17" startTargetFactors="6.94;42.59"/>
+            <send event="pop"/>
+        </transition>
     </state>
 </scxml>

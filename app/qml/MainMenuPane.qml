@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.14
 
 Pane {
     padding: 0
+    Material.elevation: 3
     Material.background: Material.color(Material.Grey, Material.Shade800)
 
     ColumnLayout {

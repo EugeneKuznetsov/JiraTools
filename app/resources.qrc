@@ -16,5 +16,7 @@
         <file>qml/HomePage.qml</file>
         <file>qml/MainMenuPane.qml</file>
         <file>qml/AvatarImage.qml</file>
+        <file>qml/BoardSelectionPage.qml</file>
+        <file>assets/default_tool_entry.svg</file>
     </qresource>
 </RCC>
