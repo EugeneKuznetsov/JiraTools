@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "networkfactory.h"
 
 int main(int argc, char **argv)
 {
@@ -8,10 +9,13 @@ int main(int argc, char **argv)
     app.setOrganizationName("Eugene Kuznetsov");
     app.setOrganizationDomain("https://github.com/EugeneKuznetsov/JiraTools");
 
+    NetworkFactory cookieSharingNetworkFactory;
     QQmlApplicationEngine engine;
+    engine.setNetworkAccessManagerFactory(&cookieSharingNetworkFactory);
     engine.addImportPath(QStringLiteral("./imports"));  // Jira plugin
     engine.addImportPath(QStringLiteral("qrc:/qml"));
     engine.load(QStringLiteral("qrc:/qml/main.qml"));
 
     return app.exec();
 }
+
