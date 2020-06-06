@@ -133,18 +133,17 @@ PageBase {
 
     Connections {
         target: JiraProxy
-        onAuthenticatingChanged: {
-            if (JiraProxy.authenticating) {
-                errorPopup.close();
-            } else if (JiraProxy.authenticated) {
-                MenuStateMachine.nextPage();
-            } else if (JiraProxy.serverError || JiraProxy.networkError) {
-                errorPopup.errorText = JiraProxy.lastErrorText;
-                errorPopup.open();
-            } else {
-                console.warn("Unknown use case?");
-            }
+        onAuthenticatingChanged: if (JiraProxy.authenticating) {
+            errorPopup.close();
+        } else if (JiraProxy.authenticated) {
+            MenuStateMachine.nextPage();
+        } else if (JiraProxy.serverError || JiraProxy.networkError) {
+            errorPopup.errorText = JiraProxy.lastErrorText;
+            errorPopup.open();
+        } else {
+            console.warn("Unknown use case?");
         }
+
     }
 
 }

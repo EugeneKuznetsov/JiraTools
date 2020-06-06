@@ -77,12 +77,10 @@ PageBase {
             font.pixelSize: 26
             color: Material.color(Material.Amber, Material.Shade300)
             onAccepted: JiraProxy.setupAndValidateServer(text)
-            onTextEdited: {
-                if (text.startsWith("https") && installCertificatePopup.enabled && !installCertificatePopup.opened)
-                    installCertificatePopup.open();
-                else if (text.startsWith("http:"))
-                    closeAllPopups();
-
+            onTextEdited: if (text.startsWith("https") && installCertificatePopup.enabled && !installCertificatePopup.opened) {
+                installCertificatePopup.open();
+            } else if (text.startsWith("http:")) {
+                closeAllPopups();
             }
             validator: RegExpValidator {
                 regExp: RegExp("^(http|https)://.*")
@@ -96,7 +94,12 @@ PageBase {
             text: qsTr("\u2713")
             enabled: !JiraProxy.validating
             font.pixelSize: 24
-            onReleased: JiraProxy.setupAndValidateServer(serverUrl.text)
+            onReleased: if (serverUrl.validator.Acceptable) {
+                JiraProxy.setupAndValidateServer(serverUrl.text);
+            } else {
+                errorPopup.errorText = qsTr("Invalid URL")
+                errorPopup.open();
+            }
 
             BusyIndicator {
                 anchors.centerIn: parent
