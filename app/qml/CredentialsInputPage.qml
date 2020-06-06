@@ -47,7 +47,7 @@ PageBase {
                     text: qsTr("Go anonymous")
                     font.pixelSize: 16
                     enabled: !JiraProxy.authenticating
-                    onReleased: nextPage()
+                    onReleased: MenuStateMachine.nextPage()
                 }
 
             }
@@ -137,7 +137,7 @@ PageBase {
             if (JiraProxy.authenticating) {
                 errorPopup.close();
             } else if (JiraProxy.authenticated) {
-                nextPage();
+                MenuStateMachine.nextPage();
             } else if (JiraProxy.serverError || JiraProxy.networkError) {
                 errorPopup.errorText = JiraProxy.lastErrorText;
                 errorPopup.open();

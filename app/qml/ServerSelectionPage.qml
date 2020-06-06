@@ -133,7 +133,7 @@ PageBase {
             name: "Jira server is Valid"
             when: JiraProxy.valid
             StateChangeScript {
-                script: nextPage()
+                script: MenuStateMachine.nextPage()
             }
         },
         State {

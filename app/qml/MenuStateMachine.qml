@@ -9,6 +9,19 @@ Item {
     property StackView mainView: null
     property StateMachine instance: scxmlLoader.stateMachine
 
+    function nextPage() {
+        instance.submitEvent("nextPage");
+    }
+
+    function prevPage() {
+        instance.submitEvent("prevPage")
+    }
+
+    function activatePage(pageId) {
+        if (pageId.length)
+            instance.submitEvent("activatePage", {pageId: pageId})
+    }
+
     StateMachineLoader {
         id: scxmlLoader
         source: Qt.resolvedUrl("../menustatemachine.scxml")
@@ -36,9 +49,4 @@ Item {
         }
     }
 
-    Connections {
-        target: mainView && mainView.currentItem ? mainView.currentItem : null
-        onNextPage: instance.submitEvent("nextPage")
-        onPrevPage: instance.submitEvent("prevPage")
-    }
 }

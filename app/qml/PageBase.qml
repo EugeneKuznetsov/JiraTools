@@ -4,9 +4,6 @@ import QtQuick.Controls 2.14
 Page {
     property bool backButton: false
 
-    signal nextPage()
-    signal prevPage()
-
     RoundButton {
         anchors {
             margins: 5
@@ -17,7 +14,7 @@ Page {
         text: qsTr("\u2190")
         font.pixelSize: 20
         visible: backButton
-        onReleased: prevPage()
+        onReleased: MenuStateMachine.prevPage()
     }
 
 }
