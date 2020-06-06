@@ -1,7 +1,8 @@
+pragma Singleton
+
 import QtScxml 5.14
 import QtQuick 2.14
 import QtQuick.Controls 2.14
-pragma Singleton
 
 Item {
     property Pane mainMenu: null
@@ -11,12 +12,6 @@ Item {
     StateMachineLoader {
         id: scxmlLoader
         source: Qt.resolvedUrl("../menustatemachine.scxml")
-    }
-
-    Connections {
-        target: mainView && mainView.currentItem ? mainView.currentItem : null
-        onNextPage: instance.submitEvent("nextPage")
-        onPrevPage: instance.submitEvent("prevPage")
     }
 
     EventConnection {
@@ -39,5 +34,11 @@ Item {
         } else if (event.name === "hideMenu") {
             mainMenu.visible = false;
         }
+    }
+
+    Connections {
+        target: mainView && mainView.currentItem ? mainView.currentItem : null
+        onNextPage: instance.submitEvent("nextPage")
+        onPrevPage: instance.submitEvent("prevPage")
     }
 }

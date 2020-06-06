@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>qtquickcontrols2.conf</file>
+        <file>menustatemachine.scxml</file>
+        <file>assets/default_avatar.svg</file>
         <file>qml/qmldir</file>
         <file>qml/main.qml</file>
         <file>qml/JiraProxy.qml</file>
@@ -12,7 +14,7 @@
         <file>qml/ServerSelectionPage.qml</file>
         <file>qml/CredentialsInputPage.qml</file>
         <file>qml/HomePage.qml</file>
-        <file>menustatemachine.scxml</file>
         <file>qml/MainMenuPane.qml</file>
+        <file>qml/AvatarImage.qml</file>
     </qresource>
 </RCC>

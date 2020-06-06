@@ -14,7 +14,7 @@ ApplicationWindow {
         MainMenuPane {
             id: mainMenu
 
-            Layout.preferredWidth: 60
+            Layout.preferredWidth: 66
             Layout.fillHeight: true
             visible: false
         }

@@ -4,25 +4,17 @@ import QtQuick.Controls.Material 2.14
 import QtQuick.Layouts 1.14
 
 Pane {
-    Material.background: Material.color(Material.Grey, Material.Shade800)
     padding: 0
+    Material.background: Material.color(Material.Grey, Material.Shade800)
 
     ColumnLayout {
         anchors.fill: parent
 
-        Rectangle {
-            Layout.topMargin: 10
+        AvatarImage {
+            id: currentUserAvatar
+
+            Layout.topMargin: 13
             Layout.alignment: Qt.AlignCenter
-            width: 48
-            height: 48
-            radius: width / 2
-            color: Material.color(Material.Grey)
-
-            Image {
-                id: currentUserAvatar
-
-                anchors.centerIn: parent
-            }
         }
 
         Item {
@@ -32,10 +24,10 @@ Pane {
 
     Connections {
         target: JiraProxy
-        onValidChanged: if (JiraProxy.authenticated) {
+        onAuthenticatedChanged: if (JiraProxy.authenticated) {
             JiraProxy.instance.mySelf(function(status, self) {
                 if (status.success)
-                    console.log(JSON.stringify(self));
+                    currentUserAvatar.source = self["avatarUrls"]["48x48"];
                 else
                     console.warn(status.errors);
             }).getUser();
