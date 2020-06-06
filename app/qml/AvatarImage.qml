@@ -6,8 +6,8 @@ import QtGraphicalEffects 1.14
 Rectangle {
     property url source: Qt.resolvedUrl("../assets/default_avatar.svg")
 
-    width: 52
-    height: 52
+    implicitWidth: 52
+    implicitHeight: 52
     radius: width / 2
     color: Material.color(Material.Grey)
     border {
@@ -38,8 +38,8 @@ Rectangle {
         id: avatarRoundingMask
 
         visible: false
-        width: parent.width - 4
-        height: parent.height - 4
+        width: parent.implicitWidth - 4
+        height: parent.implicitHeight - 4
         radius: avatarRoundingMask.width / 2
     }
 

@@ -15,11 +15,14 @@ Pane {
 
             Layout.topMargin: 13
             Layout.alignment: Qt.AlignCenter
+            Layout.preferredWidth: 52
+            Layout.preferredHeight: 52
         }
 
         Item {
             Layout.fillHeight: true
         }
+
     }
 
     Connections {
