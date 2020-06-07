@@ -21,7 +21,7 @@ Rectangle {
         anchors.centerIn: parent
         width: avatarRoundingMask.width
         height: avatarRoundingMask.height
-        source: parent.source.length ? parent.source : Qt.resolvedUrl("../../assets/default_avatar.svg")
+        source: parent.source !== "" ? parent.source : Qt.resolvedUrl("../../assets/default_avatar.svg")
         layer.enabled: true
         layer.effect: OpacityMask {
             maskSource: avatarRoundingMask
