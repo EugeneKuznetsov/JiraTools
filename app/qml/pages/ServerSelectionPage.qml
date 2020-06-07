@@ -3,6 +3,8 @@ import QtQuick.Controls 2.14
 import QtQuick.Controls.Material 2.14
 import QtQuick.Dialogs 1.3
 import QtQuick.Layouts 1.14
+import controls 1.0
+import ".." 1.0
 
 PageBase {
 

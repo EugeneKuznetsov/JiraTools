@@ -4,7 +4,7 @@ import QtQuick.Controls.Material 2.14
 import QtGraphicalEffects 1.14
 
 Rectangle {
-    property url source: Qt.resolvedUrl("../assets/default_avatar.svg")
+    property url source: Qt.resolvedUrl("../../assets/default_avatar.svg")
 
     implicitWidth: 52
     implicitHeight: 52

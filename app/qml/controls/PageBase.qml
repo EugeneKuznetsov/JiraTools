@@ -1,5 +1,6 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
+import ".." 1.0
 
 Page {
     property bool backButton: false

@@ -3,21 +3,23 @@
         <file>qtquickcontrols2.conf</file>
         <file>menustatemachine.scxml</file>
         <file>assets/default_avatar.svg</file>
+        <file>assets/default_tool_entry.svg</file>
         <file>qml/qmldir</file>
         <file>qml/main.qml</file>
         <file>qml/JiraProxy.qml</file>
         <file>qml/MenuStateMachine.qml</file>
-        <file>qml/PageBase.qml</file>
-        <file>qml/YesNoPopup.qml</file>
-        <file>qml/ErrorMessagePopup.qml</file>
-        <file>qml/WelcomePage.qml</file>
-        <file>qml/ServerSelectionPage.qml</file>
-        <file>qml/CredentialsInputPage.qml</file>
-        <file>qml/HomePage.qml</file>
-        <file>qml/MainMenuPane.qml</file>
-        <file>qml/AvatarImage.qml</file>
-        <file>qml/BoardSelectionPage.qml</file>
-        <file>assets/default_tool_entry.svg</file>
-        <file>qml/ToolEntryDelegate.qml</file>
+        <file>qml/controls/qmldir</file>
+        <file>qml/controls/AvatarImage.qml</file>
+        <file>qml/controls/ErrorMessagePopup.qml</file>
+        <file>qml/controls/MainMenuPane.qml</file>
+        <file>qml/controls/PageBase.qml</file>
+        <file>qml/controls/ToolEntryDelegate.qml</file>
+        <file>qml/controls/YesNoPopup.qml</file>
+        <file>qml/pages/qmldir</file>
+        <file>qml/pages/BoardSelectionPage.qml</file>
+        <file>qml/pages/CredentialsInputPage.qml</file>
+        <file>qml/pages/HomePage.qml</file>
+        <file>qml/pages/ServerSelectionPage.qml</file>
+        <file>qml/pages/WelcomePage.qml</file>
     </qresource>
 </RCC>

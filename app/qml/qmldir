@@ -1,13 +1,3 @@
 singleton JiraProxy 1.0 JiraProxy.qml
 singleton MenuStateMachine 1.0 MenuStateMachine.qml
-PageBase 1.0 PageBase.qml
-YesNoPopup 1.0 YesNoPopup.qml
-ErrorMessagePopup 1.0 ErrorMessagePopup.qml
-AvatarImage 1.0 AvatarImage.qml
-WelcomePage 1.0 WelcomePage.qml
-ServerSelectionPage 1.0 ServerSelectionPage.qml
-CredentialsInputPage 1.0 CredentialsInputPage.qml
-HomePage 1.0 HomePage.qml
-MainMenuPane 1.0 MainMenuPane.qml
-BoardSelectionPage 1.0 BoardSelectionPage.qml
-ToolEntryDelegate 1.0 ToolEntryDelegate.qml
+main 1.0 main.qml

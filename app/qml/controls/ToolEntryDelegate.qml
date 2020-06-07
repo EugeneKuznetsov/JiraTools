@@ -3,6 +3,7 @@ import QtQuick.Controls 2.14
 import QtQuick.Controls.Material 2.14
 import QtQuick.Layouts 1.14
 import QtGraphicalEffects 1.14
+import ".." 1.0
 
 Item {
     readonly property bool isCurrentItem: GridView.isCurrentItem
@@ -32,7 +33,7 @@ Item {
                     anchors.fill: parent
                     fillMode: Image.PreserveAspectFit
                     visible: false
-                    source: Qt.resolvedUrl("../assets/default_tool_entry.svg")
+                    source: Qt.resolvedUrl("../../assets/default_tool_entry.svg")
                 }
 
                 ColorOverlay {

@@ -5,7 +5,7 @@
         <qt:editorinfo geometry="199.23;424.18;-160;-221.74;214.77;123.56" scenegeometry="199.23;424.18;39.23;202.44;214.77;123.56"/>
         <onentry>
             <send event="replace">
-                <param name="page" expr="'WelcomePage.qml'"/>
+                <param name="page" expr="'pages/WelcomePage.qml'"/>
             </send>
             <send delay="1500ms" event="startSetup"/>
         </onentry>
@@ -15,7 +15,7 @@
         <qt:editorinfo geometry="541.43;124.75;-80.16;41.85;558.91;195.23" scenegeometry="541.43;124.75;461.27;166.60;558.91;195.23"/>
         <onentry>
             <send event="replace">
-                <param name="page" expr="'ServerSelectionPage.qml'"/>
+                <param name="page" expr="'pages/ServerSelectionPage.qml'"/>
             </send>
         </onentry>
         <state id="ServerSelection">
@@ -28,7 +28,7 @@
             <qt:editorinfo geometry="324.75;157.88;-60;-50;194;100" scenegeometry="798.93;282.63;738.93;232.63;194;100"/>
             <onentry>
                 <send event="push">
-                    <param name="page" expr="'CredentialsInputPage.qml'"/>
+                    <param name="page" expr="'pages/CredentialsInputPage.qml'"/>
                 </send>
             </onentry>
             <transition type="external" event="prevPage" target="ServerSelection">
@@ -44,7 +44,7 @@
         <qt:editorinfo geometry="263.22;571.33;-315.40;-159.67;1105.54;322.38" scenegeometry="263.22;571.33;-52.18;411.66;1105.54;322.38"/>
         <onentry>
             <send event="replace">
-                <param name="page" expr="'HomePage.qml'"/>
+                <param name="page" expr="'pages/HomePage.qml'"/>
             </send>
             <send event="showMenu"/>
         </onentry>
@@ -62,7 +62,7 @@
             <qt:editorinfo geometry="272.24;-10.18;-60;-90.15;556.36;240.52" scenegeometry="462.60;570.12;402.60;479.97;556.36;240.52"/>
             <onentry>
                 <send event="push">
-                    <param name="page" expr="'BoardSelectionPage.qml'"/>
+                    <param name="page" expr="'pages/BoardSelectionPage.qml'"/>
                 </send>
             </onentry>
             <state id="BoardSelection">
