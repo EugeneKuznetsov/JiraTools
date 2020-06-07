@@ -98,10 +98,13 @@ PageBase {
 
                         anchors.fill: parent
                         hoverEnabled: true
-                        onClicked: if (model.pageId.length) {
-                            MenuStateMachine.activatePage(model.pageId);
-                        } else {
-                            console.warn("%1 not implemented".arg(model.name));
+                        onClicked: {
+                            parent.GridView.view.currentIndex = index;
+                            if (model.pageId.length) {
+                                MenuStateMachine.activatePage(model.pageId);
+                            } else {
+                                console.warn("%1 not implemented".arg(model.name));
+                            }
                         }
                     }
 

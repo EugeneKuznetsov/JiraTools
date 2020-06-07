@@ -43,12 +43,21 @@ Item {
     function authenticate(username, password) {
         _internal.authenticating = true;
         var session = instance.session(function(status) {
+            _internal.authenticated = status.success;
             if (!status.success) {
                 _internal.serverError = true;
                 _internal.lastErrorText = status.errors;
+                _internal.authenticating = false;
+            } else {
+                instance.api2(function(status, permissions) {
+                    if (status.success)
+                        _internal.permissions = permissions["permissions"];
+                }).getPermissions("", "", "", "");
+                instance.agileBoard(function(status, boards) {
+                    _internal.agile = status.success;
+                    _internal.authenticating = false;
+                }).getAllBoards(0, 1, "", "");
             }
-            _internal.authenticated = status.success;
-            _internal.authenticating = false;
         });
         session.username = username;
         session.password = password;
@@ -105,15 +114,5 @@ Item {
             if (status.success)
                 _internal.permissions = permissions["permissions"];
         }).getPermissions("", "", "", "");
-    }
-
-    onAuthenticatedChanged: if (authenticated) {
-        instance.api2(function(status, permissions) {
-            if (status.success)
-                _internal.permissions = permissions["permissions"];
-        }).getPermissions("", "", "", "");
-        instance.agileBoard(function(status, boards) {
-            _internal.agile = status.success;
-        }).getAllBoards(0, 1, "", "");
     }
 }
