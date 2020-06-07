@@ -100,11 +100,10 @@ PageBase {
                         hoverEnabled: true
                         onClicked: {
                             parent.GridView.view.currentIndex = index;
-                            if (model.pageId.length) {
-                                MenuStateMachine.activatePage(model.pageId);
-                            } else {
+                            if (!model.pageId.length) {
                                 console.warn("%1 not implemented".arg(model.name));
                             }
+                            MenuStateMachine.activatePage(model.pageId);
                         }
                     }
 
