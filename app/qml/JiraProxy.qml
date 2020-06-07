@@ -17,6 +17,10 @@ Item {
     readonly property string serverTitle: _internal.serverTitle
     readonly property string serverVersion: _internal.serverVersion
     readonly property string serverType: _internal.serverDeployment
+    readonly property variant permissions: _internal.permissions
+    readonly property bool browsePermission: _internal.permissions && _internal.permissions["BROWSE"]["havePermission"]
+    readonly property bool anonymous: _internal.permissions && !_internal.permissions.length
+    readonly property bool agileFeatures: _internal.agile
 
     function setupAndValidateServer(serverUrl) {
         _internal.reset();
@@ -27,7 +31,6 @@ Item {
                 _internal.serverError = true;
                 _internal.lastErrorText = qsTr("Not a valid Jira server");
             } else {
-                console.debug(JSON.stringify(info));
                 _internal.serverTitle = info.hasOwnProperty("serverTitle") ? info["serverTitle"] : "";
                 _internal.serverVersion = info.hasOwnProperty("version") ? info["version"] : "";
                 _internal.serverDeployment = info.hasOwnProperty("deploymentType") ? info["deploymentType"] : "";
@@ -66,6 +69,8 @@ Item {
         property string serverTitle: ""
         property string serverVersion: ""
         property string serverDeployment: ""
+        property variant permissions: null
+        property bool agile: false
 
         function reset() {
             _internal.authenticating = false;
@@ -79,6 +84,8 @@ Item {
             _internal.serverTitle = "";
             _internal.serverVersion = "";
             _internal.serverDeployment = "";
+            _internal.permissions = null;
+            _internal.agile = false;
         }
 
     }
@@ -93,4 +100,20 @@ Item {
         }
     }
 
+    onValidChanged: if (valid) {
+        instance.api2(function(status, permissions) {
+            if (status.success)
+                _internal.permissions = permissions["permissions"];
+        }).getPermissions("", "", "", "");
+    }
+
+    onAuthenticatedChanged: if (authenticated) {
+        instance.api2(function(status, permissions) {
+            if (status.success)
+                _internal.permissions = permissions["permissions"];
+        }).getPermissions("", "", "", "");
+        instance.agileBoard(function(status, boards) {
+            _internal.agile = status.success;
+        }).getAllBoards(0, 1, "", "");
+    }
 }

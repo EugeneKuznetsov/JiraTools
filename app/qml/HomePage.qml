@@ -123,24 +123,17 @@ PageBase {
     ListModel {
         id: toolsModel
 
-        ListElement {
-            name: qsTr("Agile Board")
-            pageId: "BoardSelection"
-        }
-
-        ListElement {
-            name: qsTr("Reports")
-            pageId: ""
-        }
-
-        ListElement {
-            name: qsTr("Issue Viewer")
-            pageId: ""
-        }
-
-        ListElement {
-            name: qsTr("Search Issues")
-            pageId: ""
+        Component.onCompleted: {
+            [
+                [qsTr("Agile Board"), "BoardSelection", JiraProxy.agileFeatures],
+                [qsTr("Reports"), "", !JiraProxy.anonymous],
+                [qsTr("Issue Viewer"), "", true],
+                [qsTr("Search Issues"), "", true]
+            ].forEach(function(element) {
+                if (element[2]) {
+                    append({name: element[0], pageId: element[1], available: element[2]});
+                }
+            });
         }
 
     }

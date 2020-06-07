@@ -40,6 +40,7 @@ PageBase {
 
             Item {
                 Layout.preferredWidth: 200
+                visible: JiraProxy.browsePermission
 
                 Button {
                     anchors.right: parent.right
@@ -56,6 +57,7 @@ PageBase {
                 Layout.fillHeight: true
                 width: 1
                 color: Material.accentColor
+                visible: JiraProxy.browsePermission
             }
 
             ColumnLayout {
