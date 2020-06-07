@@ -10,3 +10,4 @@ CredentialsInputPage 1.0 CredentialsInputPage.qml
 HomePage 1.0 HomePage.qml
 MainMenuPane 1.0 MainMenuPane.qml
 BoardSelectionPage 1.0 BoardSelectionPage.qml
+ToolEntryDelegate 1.0 ToolEntryDelegate.qml

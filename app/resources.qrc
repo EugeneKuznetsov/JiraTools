@@ -18,5 +18,6 @@
         <file>qml/AvatarImage.qml</file>
         <file>qml/BoardSelectionPage.qml</file>
         <file>assets/default_tool_entry.svg</file>
+        <file>qml/ToolEntryDelegate.qml</file>
     </qresource>
 </RCC>
