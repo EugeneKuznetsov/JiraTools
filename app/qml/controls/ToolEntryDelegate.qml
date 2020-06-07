@@ -3,11 +3,12 @@ import QtQuick.Controls 2.14
 import QtQuick.Controls.Material 2.14
 import QtQuick.Layouts 1.14
 import QtGraphicalEffects 1.14
-import ".." 1.0
 
 Item {
     readonly property bool isCurrentItem: GridView.isCurrentItem
     readonly property bool isHovered: hoverArea.containsMouse
+
+    signal activatePage(string pageId)
 
     width: GridView.view.cellWidth
     height: GridView.view.cellHeight
@@ -86,7 +87,7 @@ Item {
         anchors.fill: parent
         hoverEnabled: true
         onClicked: if (model.pageId.length) {
-            MenuStateMachine.activatePage(model.pageId);
+            activatePage(model.pageId);
         } else {
             console.warn("%1 not implemented".arg(model.name));
         }
@@ -96,7 +97,7 @@ Item {
         if (!model.pageId.length) {
             console.warn("%1 not implemented".arg(model.name));
         }
-        MenuStateMachine.activatePage(model.pageId);
+        activatePage(model.pageId);
     }
 
 }

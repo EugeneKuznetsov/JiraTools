@@ -4,7 +4,7 @@ import QtQuick.Controls.Material 2.14
 import QtGraphicalEffects 1.14
 
 Rectangle {
-    property url source: Qt.resolvedUrl("../../assets/default_avatar.svg")
+    property url source: ""
 
     implicitWidth: 52
     implicitHeight: 52
@@ -21,7 +21,7 @@ Rectangle {
         anchors.centerIn: parent
         width: avatarRoundingMask.width
         height: avatarRoundingMask.height
-        source: parent.source
+        source: parent.source.length ? parent.source : Qt.resolvedUrl("../../assets/default_avatar.svg")
         layer.enabled: true
         layer.effect: OpacityMask {
             maskSource: avatarRoundingMask

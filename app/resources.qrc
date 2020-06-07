@@ -12,7 +12,6 @@
         <file>qml/controls/AvatarImage.qml</file>
         <file>qml/controls/ErrorMessagePopup.qml</file>
         <file>qml/controls/MainMenuPane.qml</file>
-        <file>qml/controls/PageBase.qml</file>
         <file>qml/controls/ToolEntryDelegate.qml</file>
         <file>qml/controls/YesNoPopup.qml</file>
         <file>qml/pages/qmldir</file>
@@ -21,5 +20,6 @@
         <file>qml/pages/HomePage.qml</file>
         <file>qml/pages/ServerSelectionPage.qml</file>
         <file>qml/pages/WelcomePage.qml</file>
+        <file>qml/pages/PageBase.qml</file>
     </qresource>
 </RCC>

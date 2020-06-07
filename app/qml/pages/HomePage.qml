@@ -16,7 +16,9 @@ PageBase {
             cellHeight: 180
             focus: true
             model: toolsModel
-            delegate: ToolEntryDelegate { }
+            delegate: ToolEntryDelegate {
+                onActivatePage: MenuStateMachine.activatePage(pageId)
+            }
         }
 
     }

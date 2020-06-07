@@ -18,6 +18,7 @@ ApplicationWindow {
             Layout.preferredWidth: 66
             Layout.fillHeight: true
             visible: false
+
         }
 
         StackView {
@@ -25,6 +26,18 @@ ApplicationWindow {
 
             Layout.fillWidth: true
             Layout.fillHeight: true
+
+        }
+
+    }
+
+    Connections {
+        target: JiraProxy
+        onAuthenticatedChanged: if (JiraProxy.authenticated) {
+            JiraProxy.instance.mySelf(function(status, self) {
+                if (status.success)
+                    mainMenu.userAvatarSource = self["avatarUrls"]["48x48"];
+            }).getUser();
         }
     }
 

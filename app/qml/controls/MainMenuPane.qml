@@ -2,9 +2,10 @@ import QtQuick 2.14
 import QtQuick.Controls 2.14
 import QtQuick.Controls.Material 2.14
 import QtQuick.Layouts 1.14
-import ".." 1.0
 
 Pane {
+    property url userAvatarSource: ""
+
     padding: 0
     Material.elevation: 3
     Material.background: Material.color(Material.Grey, Material.Shade800)
@@ -19,6 +20,7 @@ Pane {
             Layout.alignment: Qt.AlignCenter
             Layout.preferredWidth: 52
             Layout.preferredHeight: 52
+            source: userAvatarSource
         }
 
         Item {
@@ -27,15 +29,4 @@ Pane {
 
     }
 
-    Connections {
-        target: JiraProxy
-        onAuthenticatedChanged: if (JiraProxy.authenticated) {
-            JiraProxy.instance.mySelf(function(status, self) {
-                if (status.success)
-                    currentUserAvatar.source = self["avatarUrls"]["48x48"];
-                else
-                    console.warn(status.errors);
-            }).getUser();
-        }
-    }
 }
